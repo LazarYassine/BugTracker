@@ -15,6 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { ToastModule } from 'primeng/toast';
 import { NavbarComponent } from './home/navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +36,10 @@ import { NavbarComponent } from './home/navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
-    ToastModule
+    ToastModule,
+    BrowserAnimationsModule,
+    FileUploadModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

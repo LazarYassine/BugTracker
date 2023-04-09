@@ -8,27 +8,35 @@
             <div class="card-container cyan-container inline-flex">
 
                 <form [formGroup]="formGroup" class="card flex flex-wrap gap-3 p-4 ">
+
                     <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border ">
-                        <div class="text-2xl font-medium text-900 mb-3">Title :</div>
-                        <input pInputText formControlName="errorTitle_text" id="txtTitle" pKeyFilter="int"  class="w-full" />
+                        <div class="text-2xl font-medium text-900 mb-3">Image :</div>
+                        <img class="" id="Preview" width="200px" for="uploadImage" height="200px" alt="" accept="image/jpeg, image/png" style="object-fit: contain;" />
+                        <input class="w-full" id="uploadImage" (change)="Preview($event)" type="file"  />
                     </div>
 
-                    <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border " >
+                    <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border ">
+                        <div class="text-2xl font-medium text-900 mb-3">Title :</div>
+                        <input pInputText formControlName="errorTitle_text" id="txtTitle" pKeyFilter="int"
+                            class="w-full" />
+                    </div>
+
+                    <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border ">
                         <div class="text-2xl font-medium text-900 mb-3">Error Description :</div>
                         <div>
                             <p-editor formControlName="errorDesc_text" [style]="{ height: '320px' }"></p-editor>
-                        </div>                    
+                        </div>
                     </div>
                     <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border ">
                         <div class="text-2xl font-medium text-900 mb-3">Error Solution :</div>
                         <div>
                             <p-editor formControlName="errorSolu_text" [style]="{ height: '320px' }"></p-editor>
-                        </div>                    
+                        </div>
                     </div>
 
-                    
-                        <p-button (click)="Save()" class="shadow-5" label="Save" icon="pi pi-check"></p-button>
-                    
+                    <p-toast></p-toast>
+                    <p-button (click)="Save()" class="shadow-5" label="Save" icon="pi pi-check"></p-button>
+
 
                 </form>
             </div>
