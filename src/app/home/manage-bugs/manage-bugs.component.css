@@ -1,0 +1,6 @@
+@import url('node_modules//quill/dist/quill.snow.css');
+@import url('node_modules//quill/dist/quill.core.css');
+
+#txtTitle {
+    width: 300px !important;
+}
