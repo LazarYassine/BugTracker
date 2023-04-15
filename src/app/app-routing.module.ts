@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './auth/Services/auth-guard.service';
 import { BugsListComponent } from './home/bugs-list/bugs-list.component';
 import { HomeComponent } from './home/home.component';
 import { ManageBugsComponent } from './home/manage-bugs/manage-bugs.component';
+import { NotFoundComponent } from './home/not-found/not-found.component';
 
 // const routes: Routes = [
 //   { path: 'home', component: HomeComponent,
@@ -20,12 +22,17 @@ import { ManageBugsComponent } from './home/manage-bugs/manage-bugs.component';
 
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full', redirectTo: 'Home',
+    path: '', pathMatch: 'full', redirectTo: 'Home', 
   },
   {
     path: 'Home',
     component: HomeComponent,
+    canActivate:[AuthGuardService],
     children: [
+        {
+          path: 'Home',
+          component: BugsListComponent
+        },
         {
            path: 'BugsList',
            component: BugsListComponent
@@ -40,6 +47,9 @@ const routes: Routes = [
   { 
     path: 'auth', loadChildren: 
        () => import('./auth/auth.module').then((m) => m.AuthModule) 
+  },
+  {
+    path: '**', pathMatch:"full", component: NotFoundComponent
   }
 ];
 

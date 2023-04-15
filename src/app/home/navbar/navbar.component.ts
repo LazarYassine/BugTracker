@@ -38,6 +38,7 @@ ngOnInit(): void {
 
 logout() {
   this.route.navigateByUrl('auth/login')
+  localStorage.removeItem("auth_token")
 }
 
 

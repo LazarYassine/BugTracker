@@ -8,6 +8,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    PanelModule,InputTextModule,ButtonModule, CheckboxModule
+    PanelModule,
+    InputTextModule,
+    ButtonModule,
+    CheckboxModule,
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class AuthModule { }

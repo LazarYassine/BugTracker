@@ -22,9 +22,18 @@
                     </div>
 
                     <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border ">
-                        <div class="text-2xl font-medium text-900 mb-3">Error Description :</div>
+                        <div class="text-2xl font-medium text-900 mb-3">Description :</div>
+                        <div class="flex flex-column" >
+                            
+                            <textarea pKeyFilter="int" formControlName="errorDesc_text" rows="5" cols="90" maxlength="100" [autoResize]="false" pInputTextarea></textarea>
+                            <span class="text-sm" >The maximum number of characters is 100</span>
+                        </div>
+                    </div>
+
+                    <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border ">
+                        <div class="text-2xl font-medium text-900 mb-3">Error Detail :</div>
                         <div>
-                            <p-editor formControlName="errorDesc_text" [style]="{ height: '320px' }"></p-editor>
+                            <p-editor formControlName="errorDetail_text" [style]="{ height: '320px' }"></p-editor>
                         </div>
                     </div>
                     <div class="flex-auto w-full shadow-5 p-4 border-round-xl border-2 border-dashed surface-border ">

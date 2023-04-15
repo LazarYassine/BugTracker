@@ -17,7 +17,14 @@ import { ToastModule } from 'primeng/toast';
 import { NavbarComponent } from './home/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FileUploadModule} from 'primeng/fileupload';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {DataViewModule} from 'primeng/dataview';
+import { JwtInterceptorService } from './auth/Services/jwt-interceptor.service';
+import { TreeTableModule } from 'primeng/treetable';
+import { CardModule } from 'primeng/card';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AuthGuardService } from './auth/Services/auth-guard.service';
+import { NotFoundComponent } from './home/not-found/not-found.component';
 
 
 @NgModule({
@@ -26,7 +33,8 @@ import {HttpClientModule} from '@angular/common/http';
     HomeComponent,
     NavbarComponent,
     BugsListComponent,
-    ManageBugsComponent
+    ManageBugsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +47,20 @@ import {HttpClientModule} from '@angular/common/http';
     ToastModule,
     BrowserAnimationsModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    DataViewModule,
+    TreeTableModule,
+    CardModule,
+    InputTextareaModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true
+    },
+    AuthGuardService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
