@@ -8,18 +8,23 @@ import { Router } from '@angular/router';
 @Injectable()
 export class JwtInterceptorService implements HttpInterceptor {
 
-  constructor( private router: Router ) {}
+  constructor(private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     // Assuming you have a JWT token as a string
     const token = localStorage.getItem("auth_token")
+
+    if( token == null ) {
+      return next.handle(request)
+    }
+
     // Decode the JWT token
-    const decodedToken = jwtDecode(token);
+    const decodedToken =  jwtDecode(token);
     //console.log(decodedToken["exp"])
     // Get the expiration time from the decoded token
     const expirationTime = decodedToken["exp"] * 1000;  // Convert to milliseconds
-    
+
     // Get the current time
     const currentTime = new Date().getTime();
 
@@ -34,22 +39,27 @@ export class JwtInterceptorService implements HttpInterceptor {
         text: 'Your session has expired!'
       })
       this.router.navigateByUrl("auth/login")
-      process.abort
-    } 
-    // Get the JWT token from wherever it's stored in your application
-    const jwtToken = token;
+      
+      return next.handle(request)
+      
+    }
+    else {
+      // Get the JWT token from wherever it's stored in your application
+      const jwtToken = token;
 
-    // Clone the request and add the JWT token to the headers
-    const clonedRequest = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${jwtToken}`
-      }
-    });
+      // Clone the request and add the JWT token to the headers
+      const clonedRequest = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${jwtToken}`
+        }
+      });
 
-    // Pass the cloned request to the next handler
-    return next.handle(clonedRequest);
-
+      // Pass the cloned request to the next handler
+      return next.handle(clonedRequest);
+    }
     
+
+
   }
 
 }

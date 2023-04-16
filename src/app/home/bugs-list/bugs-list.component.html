@@ -15,18 +15,24 @@
                 <div class="row ">
 
 
-                    <div class="grid ">
+                    <div class="grid gap-3 ">
                         
-                        <div *ngFor="let bug of listBugs"  class="col-12 md:col-6 lg:col-3">
+                        <div *ngFor="let bug of listBugs"  class="col-12 md:col-6 lg:col-4">
                         
                             <div class="bug_container" >
                                 <div class="img_container" >
                                     <img [src]="bug.bugImgUrl" />
                                 </div>
                                 <div class="content_container" >
-                                    <span></span>
-                                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ bug.title }}r</h1>
-                                    <p>{{ bug.bugDesc }}</p>
+                                    <div style="height: 100%; width: 100%;" >
+                                        <div style="height: 30%;" >
+                                            <h1 style="width: fit-content" class="title-font text-lg font-lg text-gray-900 mb-3">{{ bug.title }}</h1>
+                                        </div>
+                                        <div style="height: 70%;" >
+                                            <p style="overflow: hidden; text-overflow: ellipsis; font-size: 15px;">{{ bug.bugDesc }}</p>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         
@@ -37,7 +43,7 @@
                 </div>
             </div>
 
-            {{ this.listBugs | json }}
+            <!-- {{ this.listBugs | json }} -->
 
 
         </div>
