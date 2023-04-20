@@ -1,8 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, Input  } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import Bug from 'src/app/auth/Models/Bug';
 import { BugsService } from 'src/app/auth/Services/bugs.service';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-manage-bugs',
@@ -25,7 +26,9 @@ export class ManageBugsComponent {
   formGroup!: FormGroup;
   //text!: string
 
-  constructor(private messageService: MessageService, private bugeService: BugsService) {
+  @Input() data: any
+
+  constructor(private messageService: MessageService, private bugeService: BugsService,  public ref?: DynamicDialogConfig) {
 
   }
 
@@ -36,6 +39,24 @@ export class ManageBugsComponent {
       errorDetail_text: new FormControl(),
       errorSolu_text: new FormControl()
   });
+  this.data = this.ref.data
+  if( this.data  ) {
+    //alert( "Alhamdulillah" )
+    //this.formGroup.value.errorTitle_text = this.data["title"].toString()
+//    ( document.getElementById("txtTitle") as HTMLInputElement ).value = this.data["title"].toString()
+    this.formGroup.get("errorTitle_text").setValue(this.data["title"].toString());
+    this.formGroup.get("errorDesc_text").setValue(this.data["bugDesc"].toString());
+    this.formGroup.get("errorDetail_text").setValue(this.data["bugDetail"].toString());
+    this.formGroup.get("errorSolu_text").setValue(this.data["bugSolution"].toString());
+    (document.getElementById("Preview") as HTMLImageElement).src = this.data["bugImgUrl"].toString()
+
+  }
+  console.log("hhh")
+  console.log(this.ref.data)
+  console.log(this.data["title"])
+  console.log(this.formGroup.value.errorTitle_text)
+
+
   }
 
   Save() {

@@ -25,6 +25,9 @@ import { CardModule } from 'primeng/card';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AuthGuardService } from './auth/Services/auth-guard.service';
 import { NotFoundComponent } from './home/not-found/not-found.component';
+import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogConfig, DynamicDialogModule } from 'primeng/dynamicdialog';
+
 
 
 @NgModule({
@@ -51,7 +54,9 @@ import { NotFoundComponent } from './home/not-found/not-found.component';
     DataViewModule,
     TreeTableModule,
     CardModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DialogModule,
+    DynamicDialogModule
   ],
   providers: [
     {
@@ -60,6 +65,7 @@ import { NotFoundComponent } from './home/not-found/not-found.component';
       multi: true
     },
     AuthGuardService,
+    DynamicDialogConfig
   ],
   bootstrap: [AppComponent]
 })

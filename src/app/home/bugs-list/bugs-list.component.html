@@ -17,26 +17,48 @@
 
                     <div class="grid gap-3 ">
                         
-                        <div *ngFor="let bug of listBugs"  class="col-12 md:col-6 lg:col-4">
+                        <div *ngFor="let bug of listBugs" style="position: relative;"  class="col-12 md:col-6 lg:col-3 bug_card">
                         
-                            <div class="bug_container" >
+                            <!-- <div class="bug_container" >
                                 <div class="img_container" >
                                     <img [src]="bug.bugImgUrl" />
                                 </div>
                                 <div class="content_container" >
                                     <div style="height: 100%; width: 100%;" >
-                                        <div style="height: 30%;" >
-                                            <h1 style="width: fit-content" class="title-font text-lg font-lg text-gray-900 mb-3">{{ bug.title }}</h1>
+                                        <div style="height: 20%; padding: 10px;" >
+                                            <h1 style="width: fit-content" class="title-font text-lg font-lg text-gray-900">{{ bug.title }}</h1>
                                         </div>
-                                        <div style="height: 70%;" >
+                                        <hr class="mb-3 text-gray-500 " />
+                                        <div style="height: 80%;" >
                                             <p style="overflow: hidden; text-overflow: ellipsis; font-size: 15px;">{{ bug.bugDesc }}</p>
                                         </div>
                                     </div>
                                     
                                 </div>
                             </div>
-                        
-                        </div>
+                            <button class="btnDelete" style="position: absolute;" ><i class="pi pi-trash" style="font-size: 1rem; "></i></button>
+                            <button class="btnEdit" style="position: absolute;" ><i class="pi pi-pen" style="font-size: 1rem; "></i></button>
+                        </div> -->
+
+                        <div class="card_container">
+                            <!-- <div class="card__header">
+                              <img [src]="bug.bugImgUrl" alt="card__image" class="card__image" >
+                            </div> -->
+                            <div class="img_container" >
+                                <img [src]="bug.bugImgUrl" />
+                            </div>
+                            <div class="card__body">
+                              <!-- <span class="tag tag-brown">Food</span> -->
+                              <h4 class="mb-3" >{{bug.title}}</h4>
+                              <p>{{ bug.bugDesc }}</p>
+                            </div>
+                            <div class="card__footer">
+                              <div class="user">
+                                  <button (click)="SeeMore(bug)" style="background-color: #3f9fef; border: none; padding: 5px; border-radius: .5em; color: white;" >See More</button>
+                                </div>
+                            </div>
+                          </div>
+
                     </div>
 
 
@@ -50,3 +72,8 @@
 
     </div>
 </div>
+
+
+<p-dialog header="Header" [(visible)]="showModel" [modal]="true"  [style]="{width: '90vw'}">
+    <app-manage-bugs [data]="myBug" ></app-manage-bugs>
+</p-dialog>
