@@ -14,6 +14,8 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 })
 export class ManageBugsComponent {
   
+  EditMode = false
+
   myBug: Bug = {
     BugID : 0,
     Title : '',
@@ -49,6 +51,7 @@ export class ManageBugsComponent {
     this.formGroup.get("errorDetail_text").setValue(this.data["bugDetail"].toString());
     this.formGroup.get("errorSolu_text").setValue(this.data["bugSolution"].toString());
     (document.getElementById("Preview") as HTMLImageElement).src = this.data["bugImgUrl"].toString()
+    this.EditMode = true
 
   }
   console.log("hhh")
@@ -80,6 +83,9 @@ export class ManageBugsComponent {
 
   }
 
+  Edit(){
+    alert("Edited")
+  }
 
   // Preview(e: Event) {
   //   let imgFile = (document.getElementById("uploadImage") as HTMLInputElement).files[0]
@@ -146,6 +152,8 @@ export class ManageBugsComponent {
     reader.readAsDataURL(imgFile);
   }
   
+
+
 
 
 }

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           console.log(token);
           localStorage.setItem("auth_token", token);
           
-          this.router.navigateByUrl("")
+          this.router.navigateByUrl("Home/BugsList")
         }
     )
 

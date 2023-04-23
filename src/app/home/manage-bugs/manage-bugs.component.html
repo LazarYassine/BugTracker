@@ -44,7 +44,9 @@
                     </div>
 
                     <p-toast></p-toast>
-                    <p-button (click)="Save()" class="shadow-5" label="Save" icon="pi pi-check"></p-button>
+                    <p-button [ngStyle]="{ 'display': EditMode ? 'none': 'inherit' }" (click)="Save()" class="shadow-5" label="Save" icon="pi pi-check"></p-button>
+                    <p-button [ngStyle]="{ 'display': !EditMode ? 'none': 'inherit' }" (click)="Edit()" class="shadow-5" styleClass="p-button-warning" label="Edit" icon="pi pi-check"></p-button>
+                    <p-button [ngStyle]="{ 'display': !EditMode ? 'none': 'inherit' }" label="cancel" styleClass="p-button-secondary"></p-button>
 
 
                 </form>
