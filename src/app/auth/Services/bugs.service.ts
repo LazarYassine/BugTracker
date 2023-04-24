@@ -21,8 +21,15 @@ export class BugsService {
   }
 
   editBug(id: number, bug: Bug): Observable<Bug> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrl}/bugs/${id}`;
     return this.http.put<Bug>(url, bug);
   }
+
+
+  deleteBug(id: number) {
+    const url = `${this.apiUrl}/Bugs/${id}`
+    return this.http.delete(url)
+  }
+
 
 }

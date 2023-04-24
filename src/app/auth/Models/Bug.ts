@@ -5,4 +5,5 @@ export default class Bug {
     BugDetail: string
     BugSolution: string
     BugImgUrl: string
+    UserId: any;
 }

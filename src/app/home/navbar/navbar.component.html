@@ -3,12 +3,17 @@
     <ng-template pTemplate="start">
         <img src=".../../../../../assets/bug.svg" height="40" class="mr-2" />
     </ng-template>
-    <ng-template pTemplate="end">
+    <ng-template pTemplate="end" style="display: flex" >
         <!-- <input type="text" pInputText placeholder="Search" class="w-full" /> -->
         <!-- <a class="{
         label: 'Logout',
         icon: 'pi pi-fw pi-power-off'
     }" ></a> -->
+    <a role="menuitem" pripple="" class="p-ripple p-element p-menuitem-link" target="undefined" ng-reflect-ng-class="[object Object]" tabindex="0" aria-haspopup="false" aria-expanded="false"><span class="p-menuitem-icon pi pi-fw pi-user" ng-reflect-ng-class="pi pi-fw pi-home"></span><!--bindings={
+      "ng-reflect-ng-if": "pi pi-fw pi-home"
+    }--><span class="p-menuitem-text">{{CurrentUserName}}</span><!--bindings={
+      "ng-reflect-ng-if-else": "[object Object]"
+    }--><!--container--><!--bindings={}--><!--bindings={}--></a>
     <a role="menuitem" (click)="logout()" pripple="" class="p-ripple p-element p-menuitem-link" target="undefined" ng-reflect-ng-class="[object Object]" tabindex="0" aria-haspopup="false" aria-expanded="false"><span class="p-menuitem-icon pi pi-fw pi-power-off" ng-reflect-ng-class="pi pi-fw pi-home"></span><!--bindings={
         "ng-reflect-ng-if": "pi pi-fw pi-home"
       }--><span class="p-menuitem-text">Logout</span><!--bindings={

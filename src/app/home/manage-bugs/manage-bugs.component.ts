@@ -22,12 +22,13 @@ export class ManageBugsComponent {
     BugDesc : '',
     BugDetail : '',
     BugSolution : '',
-    BugImgUrl : ''
+    BugImgUrl : '',
+    UserId: localStorage.getItem("currentUserID"),
   } 
 
   formGroup!: FormGroup;
   //text!: string
-
+  ID: any
   @Input() data: any
 
   constructor(private messageService: MessageService, private bugeService: BugsService,  public ref?: DynamicDialogConfig) {
@@ -54,9 +55,10 @@ export class ManageBugsComponent {
     this.EditMode = true
 
   }
+  this.ID = this.data["bugID"]
   console.log("hhh")
   console.log(this.ref.data)
-  console.log(this.data["title"])
+  console.log(this.data["bugID"])
   console.log(this.formGroup.value.errorTitle_text)
 
 
@@ -84,7 +86,32 @@ export class ManageBugsComponent {
   }
 
   Edit(){
-    alert("Edited")
+    //alert("Edited")
+    this.myBug.BugID = this.ID
+    this.myBug.Title = this.formGroup.value.errorTitle_text
+    this.myBug.BugDesc = this.formGroup.value.errorDesc_text
+    this.myBug.BugDetail = this.formGroup.value.errorDetail_text
+    this.myBug.BugSolution = this.formGroup.value.errorSolu_text
+    this.myBug.BugImgUrl = (document.getElementById("Preview") as HTMLImageElement).src
+    console.log(this.ID);
+    this.bugeService.editBug(this.ID, this.myBug).subscribe(
+      ()=>{
+        this.messageService.add({severity:'success', summary:'Success', detail:'The Bug informations are edited successfuly'});
+      }
+      
+    )
+  }
+
+  Cancel() {
+    this.ref.closable = true
+  }
+
+  Delete() {
+    this.bugeService.deleteBug(this.ID).subscribe(
+      () => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'The Bug informations are deleted successfuly'});
+      }
+    )
   }
 
   // Preview(e: Event) {
