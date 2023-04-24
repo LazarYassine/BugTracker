@@ -39,14 +39,18 @@ export class LoginComponent implements OnInit {
             // console.log(data)
             // console.log(data.UserId)
             // console.log(data["userId"])
-            localStorage.setItem("currentUser", data["userId"].toString() )
+           // localStorage.setItem("currentUser", data["userId"].toString() )
             environment.currentUser = data
             localStorage.setItem("username", data["displayName"])
             console.log(environment.currentUser)
+            if( localStorage.getItem("auth_token") != "" || localStorage.getItem("auth_token") != undefined ){
+              localStorage.setItem("currentUserID", data["userId"].toString() )
+              this.router.navigateByUrl("Home/BugsList");
+            }
           }
         )
   
-        this.router.navigateByUrl("Home/BugsList");
+        
       },
       error => {
         console.log("Error:", error);
@@ -54,6 +58,7 @@ export class LoginComponent implements OnInit {
         // Handle the error or status code here
       }
     )
+    
   }
 
 

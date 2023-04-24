@@ -31,5 +31,9 @@ export class BugsService {
     return this.http.delete(url)
   }
 
+  getBugsByUser(userId: number): Observable<Bug>{
+    const url = `${this.apiUrl}/Bugs/byUser/${userId}`
+    return this.http.get<Bug>(url);
+  }
 
 }

@@ -20,7 +20,7 @@ export class BugsListComponent {
 
   sortField: string;
 
-  listBugs: any[];
+  listBugs: any;
   cols: any[];
   myBug: any
 
@@ -36,7 +36,7 @@ export class BugsListComponent {
   }
 
   getBugs() {
-    this.bugsService.getBugs().subscribe(
+    this.bugsService.getBugsByUser( parseInt(localStorage.getItem("currentUserID"))).subscribe(
       (data)=>{ 
             console.log(data)
             this.listBugs = data
@@ -48,12 +48,19 @@ export class BugsListComponent {
   SeeMore(bug: any) {
     //this.showModel = true
     this.myBug = bug
-    console.log(this.myBug)
+    //console.log(this.myBug)
     const ref: DynamicDialogRef = this.dialogService.open(ManageBugsComponent, {
       header: 'My Dialog',
-      width: '70%',
+      width: '90%',
       data: this.myBug, // Pass the data to the dialog using the "data" property
     });
+
+    ref.close.call(
+      () => {
+        this.getBugs()
+      }
+    )
+    
   }
 
 }

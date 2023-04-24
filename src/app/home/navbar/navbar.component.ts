@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NavbarComponent {
 
-  CurrentUserName = localStorage.getItem("username")
+  CurrentUserName = ''
 
   items = [
     {
@@ -28,12 +28,12 @@ export class NavbarComponent {
 
 
 
-constructor( private route: Router ) {
+constructor( private route: Router,  ) {
 
 }
 
 ngOnInit(): void {
-
+  this.CurrentUserName = localStorage.getItem("username")
 }
 
 
