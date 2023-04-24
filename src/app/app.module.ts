@@ -27,6 +27,8 @@ import { AuthGuardService } from './auth/Services/auth-guard.service';
 import { NotFoundComponent } from './home/not-found/not-found.component';
 import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogConfig, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -56,7 +58,9 @@ import { DynamicDialogConfig, DynamicDialogModule } from 'primeng/dynamicdialog'
     CardModule,
     InputTextareaModule,
     DialogModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [
     {

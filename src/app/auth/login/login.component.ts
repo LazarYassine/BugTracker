@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import UserInfo from '../Models/UserInfo';
 import { AuthService } from '../Services/auth.service';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -31,18 +32,12 @@ export class LoginComponent implements OnInit {
   
     this.authService.login(this.User).subscribe(
       token => {
-        //console.log(token);
         localStorage.setItem("auth_token", token);
             
         this.authService.CurrentUser(this.User.Email, this.User.Password).subscribe(
           (data)=>{
-            // console.log(data)
-            // console.log(data.UserId)
-            // console.log(data["userId"])
-           // localStorage.setItem("currentUser", data["userId"].toString() )
             environment.currentUser = data
             localStorage.setItem("username", data["displayName"])
-            console.log(environment.currentUser)
             if( localStorage.getItem("auth_token") != "" || localStorage.getItem("auth_token") != undefined ){
               localStorage.setItem("currentUserID", data["userId"].toString() )
               this.router.navigateByUrl("Home/BugsList");
@@ -53,7 +48,12 @@ export class LoginComponent implements OnInit {
         
       },
       error => {
-        console.log("Error:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid credentials',
+          text: 'Please check your email and password and try again.',
+        });        
+        console.log("Error:", error.error);
         console.log("Status:", error.status);
         // Handle the error or status code here
       }

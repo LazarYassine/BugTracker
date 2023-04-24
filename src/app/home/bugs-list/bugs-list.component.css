@@ -168,3 +168,32 @@ hr {
   .user__info > small {
     color: #666;
   }
+
+
+  .p-inputtext {
+    padding: 0.75rem 0.75rem !important;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .item {
+    /* background-color: #ccc; */
+    padding: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      grid-template-columns: 1fr;
+    }
+  }
+  

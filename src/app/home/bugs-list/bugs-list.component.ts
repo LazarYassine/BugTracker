@@ -12,27 +12,17 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
   providers: [DialogService, DynamicDialogConfig]
 })
 export class BugsListComponent {
+  p: any
+  searchText: ''
   showModel: boolean = false
-  errors: any[];
-  sortOptions: SelectItem[];
-
-  sortOrder: number;
-
-  sortField: string;
 
   listBugs: any;
-  cols: any[];
   myBug: any
 
   constructor(private bugsService: BugsService, private dialogService: DialogService) {} 
 
   ngOnInit(){
     this.getBugs()
-    this.cols = [
-      { field: 'ID', header: 'Id' },
-      { field: 'Title', header: 'Title' },
-      { field: 'BugDesc', header: 'Description' }
-  ];
   }
 
   getBugs() {
@@ -46,27 +36,18 @@ export class BugsListComponent {
 
 
   SeeMore(bug: any) {
-    //this.showModel = true
     this.myBug = bug
-    //console.log(this.myBug)
     const ref: DynamicDialogRef = this.dialogService.open(ManageBugsComponent, {
       header: 'My Dialog',
       width: '90%',
-      data: this.myBug, // Pass the data to the dialog using the "data" property
+      data: this.myBug,
     });
 
-    ref.close.call(
-      () => {
-        this.getBugs()
-      }
-    )
     
   }
 
 }
-function OnInit() {
-  throw new Error('Function not implemented.');
-}
+
 
 
 
