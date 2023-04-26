@@ -28,15 +28,15 @@ To run the application, you need to have the following prerequisites installed o
 
 ### Backend
 
-1. Clone the repository by running `git clone https://github.com/<username>/BugTracker.git`
-2. Navigate to the `backend` folder using `cd BugTracker/backend`
+1. Clone the repository by running `git clone https://github.com/LazarYassine/BugTracker_Backend.git`
+2. Navigate to the project folder
 3. Run `dotnet restore` to restore the required packages
 4. Run `dotnet run` to start the API server
-5. The server should now be running on `http://localhost:5000`
 
 ### Frontend
 
-1. Navigate to the `frontend` folder using `cd BugTracker/frontend`
+1. Clone the repository by running `git clone https://github.com/LazarYassine/BugTracker_FrontEnd.git`
+1. Navigate to the project folder
 2. Run `npm install` to install the required dependencies
 3. Run `ng serve` to start the Angular server
 4. The server should now be running on `http://localhost:4200`
