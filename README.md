@@ -1,27 +1,57 @@
+
+
 # BugTracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.0.
+BugTracker is a web-based application designed for developers to store and manage bugs they encounter while coding. It provides an easy and efficient way to track bugs, and store solutions for future reference. BugTracker comes with a user authentication system with JWT tokens that allow users to sign up, sign in, and securely access their bug reports.
 
-## Development server
+## Technologies Used
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- .NET Core Web API
+- Angular Framework
+- Prime NG
+- JWT Authentication
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- User authentication system
+- Add, edit, delete and search for bugs
+- Add solutions to the bugs and store them for future reference
+- Secure and reliable
 
-## Build
+## Installation and Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To run the application, you need to have the following prerequisites installed on your system:
 
-## Running unit tests
+- .NET Core SDK 6
+- Angular CLI 10 or later
+- Node.js 12 or later
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Backend
 
-## Running end-to-end tests
+1. Clone the repository by running `git clone https://github.com/<username>/BugTracker.git`
+2. Navigate to the `backend` folder using `cd BugTracker/backend`
+3. Run `dotnet restore` to restore the required packages
+4. Run `dotnet run` to start the API server
+5. The server should now be running on `http://localhost:5000`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Frontend
 
-## Further help
+1. Navigate to the `frontend` folder using `cd BugTracker/frontend`
+2. Run `npm install` to install the required dependencies
+3. Run `ng serve` to start the Angular server
+4. The server should now be running on `http://localhost:4200`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Video Description
+
+[Click here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to watch a video in which I describe the project in my own voice.
+
+## Future Improvements
+
+- Add unit tests and integration tests
+- Add more advanced search features
+- Add email notifications for bug updates
+- Allow users to add attachments and screenshots to bug reports
+
+## Conclusion
+
+BugTracker is a reliable and easy-to-use bug tracking system that allows developers to efficiently store, manage, and track bugs. The combination of .NET Core Web API and Angular Framework makes it a powerful and scalable solution for developers of all skill levels.
