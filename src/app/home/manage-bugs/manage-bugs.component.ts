@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import Bug from 'src/app/auth/Models/Bug';
 import { BugsService } from 'src/app/auth/Services/bugs.service';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manage-bugs',
@@ -44,9 +45,7 @@ export class ManageBugsComponent {
   });
   this.data = this.ref.data
   if( this.data  ) {
-    //alert( "Alhamdulillah" )
-    //this.formGroup.value.errorTitle_text = this.data["title"].toString()
-//    ( document.getElementById("txtTitle") as HTMLInputElement ).value = this.data["title"].toString()
+    
     this.formGroup.get("errorTitle_text").setValue(this.data["title"].toString());
     this.formGroup.get("errorDesc_text").setValue(this.data["bugDesc"].toString());
     this.formGroup.get("errorDetail_text").setValue(this.data["bugDetail"].toString());
@@ -56,10 +55,6 @@ export class ManageBugsComponent {
 
   }
   this.ID = this.data["bugID"]
-  console.log("hhh")
-  console.log(this.ref.data)
-  console.log(this.data["bugID"])
-  console.log(this.formGroup.value.errorTitle_text)
 
 
   }
@@ -68,7 +63,6 @@ export class ManageBugsComponent {
     console.log(this.formGroup.value)
 
     if( this.formGroup.value.errorDesc_text && this.formGroup.value.errorTitle_text && this.formGroup.value.errorDetail_text && this.formGroup.value.errorSolu_text ) {
-      // this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
       this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
 
       this.myBug.Title = this.formGroup.value.errorTitle_text
@@ -85,21 +79,52 @@ export class ManageBugsComponent {
 
   }
 
-  Edit(){
-    //alert("Edited")
-    this.myBug.BugID = this.ID
-    this.myBug.Title = this.formGroup.value.errorTitle_text
-    this.myBug.BugDesc = this.formGroup.value.errorDesc_text
-    this.myBug.BugDetail = this.formGroup.value.errorDetail_text
-    this.myBug.BugSolution = this.formGroup.value.errorSolu_text
-    this.myBug.BugImgUrl = (document.getElementById("Preview") as HTMLImageElement).src
-    console.log(this.ID);
-    this.bugeService.editBug(this.ID, this.myBug).subscribe(
-      ()=>{
-        this.messageService.add({severity:'success', summary:'Success', detail:'The Bug informations are edited successfuly'});
+  Edit() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This action will edit the Bug information.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, edit it!',
+      cancelButtonText: 'No, cancel',
+      reverseButtons: true,
+      customClass: {
+        container: 'my-swal-container'
       }
-      
-    )
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.myBug.BugID = this.ID;
+        this.myBug.Title = this.formGroup.value.errorTitle_text;
+        this.myBug.BugDesc = this.formGroup.value.errorDesc_text;
+        this.myBug.BugDetail = this.formGroup.value.errorDetail_text;
+        this.myBug.BugSolution = this.formGroup.value.errorSolu_text;
+        this.myBug.BugImgUrl = (document.getElementById("Preview") as HTMLImageElement).src;
+        console.log(this.ID);
+        
+        this.bugeService.editBug(this.ID, this.myBug).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Edited!',
+              text: 'The Bug information has been edited successfully.',
+              icon: 'success',
+              customClass: {
+                container: 'my-swal-container'
+              }
+            });
+          },
+          () => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'An error occurred while editing the Bug information.',
+              icon: 'error',
+              customClass: {
+                container: 'my-swal-container'
+              }
+            });
+          }
+        );
+      }
+    });
   }
 
   Cancel() {
@@ -107,11 +132,43 @@ export class ManageBugsComponent {
   }
 
   Delete() {
-    this.bugeService.deleteBug(this.ID).subscribe(
-      () => {
-        this.messageService.add({severity:'success', summary:'Success', detail:'The Bug informations are deleted successfuly'});
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel',
+      reverseButtons: true,
+      customClass: {
+        container: 'my-swal-container'
       }
-    )
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.bugeService.deleteBug(this.ID).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'The Bug information has been deleted successfully.',
+              icon: 'success',
+              customClass: {
+                container: 'my-swal-container'
+              }
+            });
+          },
+          () => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'An error occurred while deleting the Bug information.',
+              icon: 'error',
+              customClass: {
+                container: 'my-swal-container'
+              }
+            });
+          }
+        );
+      }
+    });
   }
 
   // Preview(e: Event) {

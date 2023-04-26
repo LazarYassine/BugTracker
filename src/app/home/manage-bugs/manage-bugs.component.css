@@ -4,3 +4,9 @@
 #txtTitle {
     width: 300px !important;
 }
+
+.my-swal-container {
+    z-index: 9999999 !important; /* Adjust the z-index value as per your requirement */
+  }
+  
+
