@@ -63,7 +63,7 @@ export class ManageBugsComponent {
     console.log(this.formGroup.value)
 
     if( this.formGroup.value.errorDesc_text && this.formGroup.value.errorTitle_text && this.formGroup.value.errorDetail_text && this.formGroup.value.errorSolu_text ) {
-      this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+      this.messageService.add({severity:'success', summary:'Success', detail:'The Bug informations are added successfully'});
 
       this.myBug.Title = this.formGroup.value.errorTitle_text
       this.myBug.BugDesc = this.formGroup.value.errorDesc_text
@@ -74,7 +74,7 @@ export class ManageBugsComponent {
       this.bugeService.addBug(this.myBug).subscribe()
 
     }else {
-      this.messageService.add({severity:'warn', summary:'Service Message', detail:'You need to fill all the informations'});
+      this.messageService.add({severity:'warn', summary:'Error', detail:'You need to fill all the informations'});
     }
 
   }
