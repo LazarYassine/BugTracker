@@ -51,7 +51,7 @@ It is essential to complete these steps to ensure the proper functioning of the 
 
 ## Video Description
 
-[Click here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to watch a video in which I describe the project in my own voice.
+[Click here](https://www.youtube.com/watch?v=ZS9yExSgMgs) to watch a video in which I describe the project in my own voice.
 
 ## Future Improvements
 
