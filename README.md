@@ -1,8 +1,6 @@
-
-
 # BugTracker
 
-BugTracker is a web-based application designed for developers to store and manage bugs they encounter while coding. It provides an easy and efficient way to track bugs, and store solutions for future reference. BugTracker comes with a user authentication system with JWT tokens that allow users to sign up, sign in, and securely access their bug reports.
+BugTracker is a web-based application designed for developers to store and manage bugs they encounter while coding. It provides an easy and efficient way to track bugs and store solutions for future reference. BugTracker comes with a user authentication system with JWT tokens that allow users to sign up, sign in, and securely access their bug reports.
 
 ## Technologies Used
 
@@ -14,7 +12,7 @@ BugTracker is a web-based application designed for developers to store and manag
 ## Features
 
 - User authentication system
-- Add, edit, delete and search for bugs
+- Add, edit, delete, and search for bugs
 - Add solutions to the bugs and store them for future reference
 - Secure and reliable
 
@@ -36,10 +34,20 @@ To run the application, you need to have the following prerequisites installed o
 ### Frontend
 
 1. Clone the repository by running `git clone https://github.com/LazarYassine/BugTracker_FrontEnd.git`
-1. Navigate to the project folder
-2. Run `npm install` to install the required dependencies
-3. Run `ng serve` to start the Angular server
-4. The server should now be running on `http://localhost:4200`
+2. Navigate to the project folder
+3. Run `npm install` to install the required dependencies
+4. Run `ng serve` to start the Angular server
+5. The server should now be running on `http://localhost:4200`
+
+## Important: Running SQL Scripts
+
+Before running the backend side of BugTracker, it is crucial to set up the database by running the provided SQL scripts. These scripts create the necessary tables and establish the required relationships between them. Please follow the instructions below to run the SQL scripts:
+
+1. Open the SQL script file `bugtrackerdb.sql` located in the repository.
+2. Execute the SQL script in a database management tool or query editor to create the `BugTrackerDB` database, the `Bug` table, and the `UserInfo` table.
+3. Make sure the database connection settings in the backend code match your database configuration (e.g., server name, credentials).
+
+It is essential to complete these steps to ensure the proper functioning of the BugTracker application. After running the SQL scripts and configuring the database connection, you can proceed with the backend and frontend installation as described above.
 
 ## Video Description
 
