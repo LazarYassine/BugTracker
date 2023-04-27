@@ -5,8 +5,7 @@
 import UserInfo from "src/app/auth/Models/UserInfo";
 
 export const environment = {
-  production: false,
-  currentUser: new UserInfo()
+  production: false
 };
 
 

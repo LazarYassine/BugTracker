@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             
         this.authService.CurrentUser(this.User.Email, this.User.Password).subscribe(
           (data)=>{
-            environment.currentUser = data
+            
             localStorage.setItem("username", data["displayName"])
             if( localStorage.getItem("auth_token") != "" || localStorage.getItem("auth_token") != undefined ){
               localStorage.setItem("currentUserID", data["userId"].toString() )

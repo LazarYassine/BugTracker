@@ -13,7 +13,10 @@ export class AppComponent {
 
   ngOnInit(){
     console.log(this.router.url)
-    if( !localStorage.getItem("auth_token") && this.router.url == '/' ) {
+    if(this.router.url == '/auth/signup'){
+      this.router.navigateByUrl("/auth/signup")
+    }
+    else if( !localStorage.getItem("auth_token") && this.router.url == '/' ) {
       //alert("You are not logged in Or your session in Ended !!!")
       console.log(this.router.url)
       this.router.navigateByUrl("auth/login")

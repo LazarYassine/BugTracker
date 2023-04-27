@@ -30,7 +30,7 @@ export class JwtInterceptorService implements HttpInterceptor {
 
     console.log(this.router.url)
     // Compare the current time with the token's expiration time
-    if (expirationTime < currentTime && this.router.url != "/auth/login") {
+    if (expirationTime < currentTime && this.router.url != "/auth/login" && this.router.url != "/auth/signup") {
       // Token is expired
       console.log('Token has expired');
       Swal.fire({

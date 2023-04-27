@@ -3,6 +3,7 @@ import UserInfo from '../Models/UserInfo';
 import { AuthService } from '../Services/auth.service';
 import { HttpResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,11 +21,12 @@ export class SignUpComponent {
     CreatedDate: new Date()
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
 
   register() {
     //console.log(this.User);
+    console.log(this.router.url)
     if ( this.User.UserName == "" && this.User.DisplayName == "" && this.User.Email == "" && this.User.Password == "" ) {
       Swal.fire({
         icon: 'warning',
