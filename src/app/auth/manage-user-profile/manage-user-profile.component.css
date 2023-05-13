@@ -1,0 +1,61 @@
+.container {
+    background-color: #eee;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .title {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: white;
+    border: 1px black dashed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form {
+    padding: 20px;
+    border-radius: 1em;
+    border: 1px black dashed;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .input-field {
+    width: 100%;
+  }
+  
+  @media (min-width: 576px) {
+    .input-field {
+      width: calc(50% - 5px);
+    }
+  }
+  
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .button-group button {
+    flex: 1 0 100%;
+  }
+  
+  @media (min-width: 576px) {
+    .button-group button {
+      flex: 0 0 calc(50% - 5px);
+    }
+  }
+
+#profileImg {
+    width: 100px;
+    height: 100px;
+    margin: 0px 20px 20px 0;
+    border: 1px dashed black;
+    border-radius: 50%;
+  }
+  

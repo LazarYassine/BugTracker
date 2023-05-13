@@ -41,7 +41,8 @@ export class ManageBugsComponent {
       errorTitle_text: new FormControl(),
       errorDesc_text: new FormControl(),
       errorDetail_text: new FormControl(),
-      errorSolu_text: new FormControl()
+      errorSolu_text: new FormControl(),
+      tags: new FormControl<string[] | null>(null)
   });
   this.data = this.ref.data
   if( this.data  ) {

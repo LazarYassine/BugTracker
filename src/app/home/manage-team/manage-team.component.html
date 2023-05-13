@@ -1,0 +1,45 @@
+<div class="surface-card p-4 shadow-2 border-round">
+    <div class="text-3xl font-medium text-900 mb-3">Manage Team</div>
+    <!-- <div class="font-medium text-500 mb-3">Vivamus id nisl interdum, blandit augue sit amet, eleifend mi.</div> -->
+    <div style="height: fit-content" class="border-2 border-dashed surface-border">
+
+        
+<div class="card">
+    <h1 style="text-align: center; padding: 20px; margin-left:40px; margin-right: 40px; border-radius: 0.375rem; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); "  >Team Members</h1>
+
+    <div class="search_area">
+        <span class="search_container">
+            <i class="pi pi-search"></i>
+            <input style="border: none;" type="text" placeholder="Search Members..." pInputText />
+        </span>
+
+    </div>
+
+    <div class="flex flex-wrap justify-content-center card-container blue-container" style="max-width: 100%" >
+        
+        
+        
+        <div *ngFor="let item of items" id="user_{{item}}" class="flex align-items-center justify-content-evenly bg-blue-500 font-bold text-white m-2 border-round" style="min-width: 400px; min-height: 200px">
+           <!-- {{ item }} -->
+
+            <div class="img_container" >
+                <img src="../../../assets/404.svg" width="80px" height="80px" />
+            </div>
+
+            <div class="content">
+                <h3>Jhon Doe</h3>
+                <p>name@domain.com</p>
+            </div>
+
+            
+            <input (change)="chooseUser($event)" class="checkbox" type="checkbox" />
+
+        </div>
+        <!--{{ this.items | json }} -->
+    </div>
+</div>
+
+
+
+    </div>
+</div>

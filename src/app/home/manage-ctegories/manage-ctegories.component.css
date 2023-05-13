@@ -1,0 +1,115 @@
+.card {
+    width: 80%;
+    height: 80vh;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formgrid {
+    height: 100%;
+}
+
+.field {
+    height: 100%;
+    padding: 20px;
+    overflow: scroll;
+}
+
+.categorie_container {
+    height: 100px;
+    min-width: 150px;
+    width: 220px;
+    background-color: rgb(236,242,255);
+    border-radius: 7px;
+    font-size: 1em !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(93,135,255);
+    border: 1px dashed rgb(93,135,255);
+}
+
+.new_categorie {
+    transition: visibility 500ms 100ms ease-in-out;
+}
+
+.categorie_container #add_cat_svg {
+    transition: all 500ms ease-in-out;
+}
+
+.categorie_container:hover > .new_categorie {
+    visibility: inherit;
+}
+.categorie_container:hover > #add_cat_svg {
+    z-index: 9999;
+    transform: scale(2);
+    fill: white
+}
+
+.new_categorie {
+    height: 100px;
+    min-width: 150px;
+    width: 220px;
+    background-color: rgba(256,256,256, 0.3);
+    position: absolute;
+    border-radius: 7px;
+    visibility: hidden;
+}
+
+.bg_error {
+    background-color: rgb(253,237,232);
+    color: rgb(250,137,107);
+    border: 1px dashed rgb(250,137,107);
+}
+
+
+.field {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(93,135,255) #f5f5f5;
+  }
+  
+  .field::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f5f5f5;
+  }
+  
+  .field::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(93,135,255);
+  }
+  
+  .field::-webkit-scrollbar-thumb:hover {
+    background-color: #666;
+  }
+  
+
+
+.field_error {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #EB0000 #FDEDE8;
+  }
+  
+  .field_error::-webkit-scrollbar {
+    width: 8px;
+    background-color: #FDEDE8;
+  }
+  
+  .field_error::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #EB0000;
+  }
+  
+  .field_error::-webkit-scrollbar-thumb:hover {
+    background-color: #666;
+  }
+  
+  .p-autocomplete {
+    width: 412px !important;
+  }
+ 
+
+  

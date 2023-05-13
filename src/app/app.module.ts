@@ -29,6 +29,12 @@ import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogConfig, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { FooterComponent } from './home/footer/footer.component';
+import { ChipsModule } from 'primeng/chips';
+import { ManageTeamComponent } from './home/manage-team/manage-team.component';
+import { ManageProjectsComponent } from './home/manage-projects/manage-projects.component';
+import { ManageCtegoriesComponent } from './home/manage-ctegories/manage-ctegories.component';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 
 
@@ -39,7 +45,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NavbarComponent,
     BugsListComponent,
     ManageBugsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FooterComponent,
+    ManageTeamComponent,
+    ManageProjectsComponent,
+    ManageCtegoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +70,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
     DialogModule,
     DynamicDialogModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChipsModule,
+    CheckboxModule,
+    AutoCompleteModule
   ],
   providers: [
     {

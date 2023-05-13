@@ -10,12 +10,14 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ManageUserProfileComponent } from './manage-user-profile/manage-user-profile.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignUpComponent,
+    ManageUserProfileComponent,
   ],
   imports: [
     CommonModule,

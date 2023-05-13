@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="title">
+      <h3>Hi {{CurrentUserName}}</h3>
+    </div>
+    <img src="../../../assets/404.svg" id="profileImg" width="80px" height="80px" />
+    <input type="file" id="profileImgUpload" (change)="Preview($event)" />
+    <div class="form">
+      
+      <input class="input-field" placeholder="Username" type="text" pInputText />
+      <input class="input-field" placeholder="Full name" type="text" pInputText />
+      <input class="input-field" placeholder="Email" type="text" pInputText />
+      <input class="input-field" placeholder="Password" type="text" pInputText />
+    </div>
+    <div class="button-group">
+      <button class="p-button p-button-warning">Warning</button>
+      <button class="p-button p-button-danger">Danger</button>
+    </div>
+  </div>
+  
