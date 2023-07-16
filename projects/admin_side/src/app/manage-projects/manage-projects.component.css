@@ -1,0 +1,10 @@
+.p-datepicker-group-container {
+    position: fixed;
+    z-index: 9999999999 !important;
+    background-color: white;
+}
+
+.p-dialog-header {
+    background-color: red;
+    z-index: -1 !important;
+}

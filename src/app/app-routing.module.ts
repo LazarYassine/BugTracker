@@ -7,6 +7,8 @@ import { ManageBugsComponent } from './home/manage-bugs/manage-bugs.component';
 import { NotFoundComponent } from './home/not-found/not-found.component';
 import { ManageTeamComponent } from './home/manage-team/manage-team.component';
 import { ManageCtegoriesComponent } from './home/manage-ctegories/manage-ctegories.component';
+import { ManageProjectsComponent } from './home/manage-projects/manage-projects.component';
+import { ManageProjectBugsComponent } from './home/manage-project-bugs/manage-project-bugs.component';
 
 // const routes: Routes = [
 //   { path: 'home', component: HomeComponent,
@@ -50,6 +52,14 @@ const routes: Routes = [
         {
           path: 'ManageCategories',
           component: ManageCtegoriesComponent
+        },
+        {
+          path: 'ManageProjects',
+          component: ManageProjectsComponent
+        },
+        {
+          path: 'ManageProjectBugs',
+          component: ManageProjectBugsComponent
         }
     ]
   },

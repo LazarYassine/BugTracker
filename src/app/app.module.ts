@@ -35,6 +35,10 @@ import { ManageTeamComponent } from './home/manage-team/manage-team.component';
 import { ManageProjectsComponent } from './home/manage-projects/manage-projects.component';
 import { ManageCtegoriesComponent } from './home/manage-ctegories/manage-ctegories.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ManageProjectBugsComponent } from './home/manage-project-bugs/manage-project-bugs.component';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -49,7 +53,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     FooterComponent,
     ManageTeamComponent,
     ManageProjectsComponent,
-    ManageCtegoriesComponent
+    ManageCtegoriesComponent,
+    ManageProjectBugsComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,10 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     NgxPaginationModule,
     ChipsModule,
     CheckboxModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    ToolbarModule,
+    TableModule,
+    ConfirmDialogModule
   ],
   providers: [
     {

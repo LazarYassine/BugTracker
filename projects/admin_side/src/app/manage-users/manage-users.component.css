@@ -1,0 +1,7 @@
+p-autoComplete {
+    z-index: 999;
+}
+
+ng-template {
+    z-index: -1;
+}

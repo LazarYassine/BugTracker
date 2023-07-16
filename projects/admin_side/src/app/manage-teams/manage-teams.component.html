@@ -1,0 +1,166 @@
+
+<div class="card">
+    <p-toast></p-toast>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedRoles || !selectedRoles.length"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="teams"
+        [rows]="5"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'role.role_name', 'representative.name', 'status']"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedRoles"
+        [rowHover]="true"
+        dataKey="role_id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Teams</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <!-- <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." /> -->
+                    <!-- <input pInputText type="text" #inputText (input)="dt.filterGlobal(inputText.value, 'contains')" placeholder="Search..." /> -->
+                    <input pInputText type="text" #inputText [(ngModel)]="filterValue" (input)="filterRoles()" placeholder="Search..." />
+
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="team_id" style="min-width:15rem">Team_id <p-sortIcon field="Team_id"></p-sortIcon></th>
+                
+                <th pSortableColumn="team_name">Team_name <p-sortIcon field="Team_name"></p-sortIcon></th>
+
+                <th pSortableColumn="team_name">team_lead_name <p-sortIcon field="Team_name"></p-sortIcon></th>
+
+                <th pSortableColumn="team_name">Created_at <p-sortIcon field="Team_name"></p-sortIcon></th>
+
+
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-team>
+            <tr  >
+                <td (click)="ManageTeamUsers(team)" >{{ team.team_id }}</td>
+                <td (click)="ManageTeamUsers(team)">
+                    <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" width="50" class="shadow-4" /> -->
+                    {{ team.team_name }}
+                </td>
+
+                <td (click)="ManageTeamUsers(team)" >
+                    {{ team.team_lead_name }}
+                </td>
+
+                <td (click)="ManageTeamUsers(team)" >
+                    {{ team.created_at | date:'yyyy-MM-dd HH:mm:ss' }}
+                </td>
+                
+
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editTeam(team)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteTeam(team)"></button>
+                </td>
+            </tr>
+
+
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">In total there are {{ teams ? teams.length : 0 }} teams.</div>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog [maximizable]="true" [(visible)]="rolesDialog" [style]="{ width: '500px' }" header="{{ ManageDialogHeader }}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content" >
+        <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.image" class="block m-auto pb-3" *ngIf="product.image" /> -->
+        <div class="field flex align-items-center justify-content-around p-2 ">
+            <label for="name">Le nom d'equipe: </label>
+            <input type="text" style="width: 300px;" pInputText id="name" [(ngModel)]="myTeam.team_name" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted">Name is required.</small> -->
+        </div>
+
+
+        <div class="field flex align-items-center justify-content-around p-2 ">
+            <label for="name">L'admin d'équipe: </label>
+            <p-autoComplete [(ngModel)]="selectedUser" [virtualScroll]="true" [suggestions]="filteredUsers" [virtualScrollItemSize]="34" (completeMethod)="filterUsers($event)" [dropdown]="true" field="DisplayName" > </p-autoComplete>
+            <!-- <small class="p-error" *ngIf="submitted">Name is required.</small> -->
+        </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="SaveTeam()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+
+
+<p-dialog [maximizable]="true" header="Gérer les membres" [(visible)]="ManageTeamUsersDialog" [style]="{width: '100vw'}" [maximizable]="true">
+    <div class="grid">
+        <div class="col-12 md:col-6 lg:col-6">
+            <div class=" text-center flex p-3 border-round-sm font-bold">
+                <div style="width: 50%; padding: 20px;" >
+                    <label>L'equipe:</label>
+                </div>
+                <div style="width: 50%; padding: 20px;" >
+                    <p style="text-decoration: underline;" >{{ User_Team == null ? '--' : User_Team.team_name }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-6">
+            <div class=" text-center flex align-items-center  p-3 border-round-sm font-bold">
+                <div style="width: 50%; padding: 20px;" >
+                    <label>Le personne:</label>
+                </div>
+                <div style="width: 50%;" >
+                    <p-autoComplete [(ngModel)]="selectedUser" [virtualScroll]="true" [suggestions]="filteredUsers" [virtualScrollItemSize]="34" (completeMethod)="filterUsers($event)" [dropdown]="true" field="DisplayName" > </p-autoComplete>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="col-12 md:col-6 lg:col-3" *ngFor="let user_team of User_Teams" >
+            <!-- <div class="text-center p-3 border-round-sm bg-primary font-bold">{{ user_team.user_name }}</div> -->
+            <div class="text-center p-3 border-round-sm bg-primary font-bold"
+                (mouseenter)="user_team.showDeleteButton = true"
+                (mouseleave)="user_team.showDeleteButton = false"
+                style="position: relative;">
+                {{ user_team.user_name }}
+                <button class="btn_delete" (click)="DeleteMembre(user_team)" *ngIf="user_team.showDeleteButton" >
+                    <i class="pi pi-trash" ></i>
+                </button>
+        <!-- <button icon="pi pi-trash"  styleClass="p-button-danger"></button> -->
+    </div>
+        </div>
+        <!-- <div class="col-12 md:col-6 lg:col-3">
+            <div class="text-center p-3 border-round-sm bg-primary font-bold">col-12 md:col-6 lg:col-3</div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <div class="text-center p-3 border-round-sm bg-primary font-bold">col-12 md:col-6 lg:col-3</div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <div class="text-center p-3 border-round-sm bg-primary font-bold">col-12 md:col-6 lg:col-3</div>
+        </div> -->
+    </div>
+
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="SaveUserTeam()"></button>
+    </ng-template>
+</p-dialog>

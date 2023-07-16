@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TeamsService } from 'projects/admin_side/src/app/Services/teams.service';
 import UserInfo from 'src/app/auth/Models/UserInfo';
 
 @Component({
@@ -13,7 +14,9 @@ export class ManageTeamComponent {
   items: number[];
   chosenUser: UserInfo[] = [];
 
-  constructor() {}
+  constructor(private teamService: TeamsService) {}
+
+  //allTeams []
 
   ngOnInit(){
     this.fillData()

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import UserInfo from '../Models/UserInfo';
 import Bug from '../Models/Bug';
+import { UserWithRoleDto } from 'projects/admin_side/src/app/Models/UserWithRoleDto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,15 @@ export class AuthService {
     })
   }
 
-  CurrentUser(email:any, password: any) : Observable<UserInfo>{
+  CurrentUser(email:any, password: any) : Observable<UserWithRoleDto>{
     const url  = `${this.apiUrl}/currentUser?email=${email}&password=${password}`
-    return this.http.get<UserInfo>(url)
+    return this.http.get<UserWithRoleDto>(url)
   }
+
+  updateUserInfo(userinfo: UserInfo): Observable<any> {
+    const url = `${this.apiUrl}/editUserInfo`;
+    return this.http.put<any>(url, userinfo);
+  }
+
 
 }

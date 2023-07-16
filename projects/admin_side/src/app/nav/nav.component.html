@@ -1,0 +1,15 @@
+
+<div class="card flex justify-content-center">
+    <p-sidebar [(visible)]="sidebarVisible" [fullScreen]="true">
+        <div class="nav_list" >
+            <ul>
+                <li (click)="GoToDashboard()" >Dashboard</li>
+                <li (click)="ManageRoles()" >Gérer les roles</li>
+                <li (click)="ManageUsers()" >Gérer les utilisateurs</li>
+                <li (click)="ManageProjects()" >Gérer les projets</li>
+                <li (click)="ManageTeams()"  >Gérer les equipes</li>
+            </ul>
+        </div>
+    </p-sidebar>
+    <p-button (click)="sidebarVisible = true" icon="pi pi-th-large"></p-button>
+</div>

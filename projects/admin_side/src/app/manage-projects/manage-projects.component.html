@@ -1,0 +1,120 @@
+
+<div class="card">
+    <p-toast></p-toast>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedRoles || !selectedRoles.length"></button> -->
+        </ng-template>
+
+        <!-- <ng-template pTemplate="right">
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template> -->
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="filteredProjects"
+        [rows]="5"
+        [paginator]="true"
+        
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedRoles"
+        [rowHover]="true"
+        dataKey="project_id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Projects</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <!-- <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." /> -->
+                    <!-- <input pInputText type="text" #inputText (input)="dt.filterGlobal(inputText.value, 'contains')" placeholder="Search..." /> -->
+                    <input pInputText type="text" #inputText [(ngModel)]="filterValue" (input)="filterProjects()" placeholder="Search..." />
+
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="project_id" style="min-width:15rem">project_id <p-sortIcon field="Project_id"></p-sortIcon></th>
+                
+                <th pSortableColumn="project_name">project_name <p-sortIcon field="project_name"></p-sortIcon></th>
+
+                <!-- <th pSortableColumn="team_name">team_lead_name <p-sortIcon field="Team_name"></p-sortIcon></th>
+
+                <th pSortableColumn="team_name">Created_at <p-sortIcon field="Team_name"></p-sortIcon></th> -->
+
+
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-project>
+            <tr>
+                <td>{{ project.project_id }}</td>
+                <td>
+                    <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" width="50" class="shadow-4" /> -->
+                    {{ project.project_name }}
+                </td>
+
+                <!-- <td>
+                    {{ team.team_lead_name }}
+                </td>
+
+                <td>
+                    {{ team.created_at | date:'yyyy-MM-dd HH:mm:ss' }}
+                </td> -->
+                
+
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProject(project)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProject(project)"></button>
+                </td>
+            </tr>
+
+
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">In total there are {{ projects ? projects.length : 0 }} projects.</div>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog [maximizable]="true" [(visible)]="projectDialog" [baseZIndex]="-1" [style]="{ width: '80vw', height: '80vh' }" header="{{ ManageDialogHeader }}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content" style="position: relative; z-index: 9999; width: 100%">
+      <div class="flex flex-wrap" style="max-width: 100%">
+        <div class="flex flex-wrap justify-between m-2 border-round w-100">
+          <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+            <label for="name">Le nom de projet:</label>
+            <input type="text" pInputText id="name" [(ngModel)]="myProject.project_name" style="width:292px" required autofocus />
+          </div>
+  
+          <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+            <label for="admin">L'equipe:</label>
+            <p-autoComplete [(ngModel)]="selectedTeam" [virtualScroll]="true" [suggestions]="filteredTeams" [virtualScrollItemSize]="34" (completeMethod)="filterTeams($event)" [dropdown]="true" field="team_name" > </p-autoComplete>
+          </div>
+  
+          <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+            <label for="date">La date de début:</label>
+            <p-calendar [(ngModel)]="myProject.start_date" [autoZIndex]="false" [style]="{'position': 'relative', 'overflow': 'visible', 'z-index': '999', 'width': '292px', }"></p-calendar>
+            <!-- <p-calendar ></p-calendar> -->
+          </div>
+          <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+            <label for="date">La date de fin:</label>
+            <p-calendar [(ngModel)]="myProject.end_date"  [autoZIndex]="false" [style]="{'position': 'relative', 'overflow': 'visible', 'width': '292px', }"></p-calendar>
+            <!-- <p-calendar ></p-calendar> -->
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="SaveProject()"></button>
+    </ng-template>
+  </p-dialog>
+  
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

@@ -4,6 +4,7 @@ import UserInfo from '../Models/UserInfo';
 import { AuthService } from '../Services/auth.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { timeout } from 'rxjs';
 
 
 @Component({
@@ -29,7 +30,13 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log(this.User);
-  
+    console.log("Start at => " + new Date() )
+
+   
+    document.getElementById("loader").style.visibility = "visible";
+    
+
+
     this.authService.login(this.User).subscribe(
       token => {
         localStorage.setItem("auth_token", token);
@@ -42,6 +49,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("currentUserID", data["userId"].toString() )
               this.router.navigateByUrl("Home/BugsList");
             }
+            localStorage.setItem("role", data["roleName"])
           }
         )
   
@@ -58,7 +66,8 @@ export class LoginComponent implements OnInit {
         // Handle the error or status code here
       }
     )
-    
+    document.getElementById("loader").style.visibility = "hidden"
+    console.log("End at => " + new Date() )
   }
 
 

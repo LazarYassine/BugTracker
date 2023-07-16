@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AdminSide</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+
+  <script>
+    if( document.referrer != '' ){
+      const currentUrl = window.location.href;
+      console.log(currentUrl);
+
+      let param1 = currentUrl.substring(currentUrl.indexOf("auth=")+5, currentUrl.indexOf("&role"));
+      let param2 = currentUrl.substring(currentUrl.indexOf("&role") + 6);
+      //window.alert(param);
+//      alert(currentUrl.indexOf("auth=")+5)
+//      alert(param1)
+      localStorage.setItem("exp", param1)
+      localStorage.setItem("role", param2)
+      console.log("----------")
+      console.log(currentUrl.indexOf("&role"))
+
+    }else if ( localStorage.getItem("exp") == null || localStorage.getItem("role") == null ) {
+      const currentUrl = window.location.href;
+      console.log(currentUrl);
+
+      let param1 = currentUrl.substring(currentUrl.indexOf("auth=")+5, currentUrl.indexOf("&role"));
+      let param2 = currentUrl.substring(currentUrl.indexOf("&role") + 6);
+      //window.alert(param);
+      alert(currentUrl.indexOf("auth=")+5)
+      alert(param1)
+      localStorage.setItem("exp", param1)
+      localStorage.setItem("role", param2)
+      // console.log("----------")
+      // console.log(currentUrl.indexOf("&role"))
+
+    }
+    
+  </script>
+  
+</body>
+</html>

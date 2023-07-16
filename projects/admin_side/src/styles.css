@@ -1,0 +1,13 @@
+@import "primeflex/primeflex.css";
+@import '../../../node_modules/primeng/resources/themes/tailwind-light/theme.css';
+@import "primeicons/primeicons.css";
+
+body {
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+}

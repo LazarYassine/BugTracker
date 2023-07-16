@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.fullPage {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/403.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

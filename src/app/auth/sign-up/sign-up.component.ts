@@ -27,7 +27,7 @@ export class SignUpComponent {
   register() {
     //console.log(this.User);
     console.log(this.router.url)
-    if ( this.User.UserName == "" && this.User.DisplayName == "" && this.User.Email == "" && this.User.Password == "" ) {
+    if ( this.User.UserName == "" || this.User.DisplayName == "" || this.User.Email == "" || this.User.Password == "" ) {
       Swal.fire({
         icon: 'warning',
         title: 'Please fill all fields',

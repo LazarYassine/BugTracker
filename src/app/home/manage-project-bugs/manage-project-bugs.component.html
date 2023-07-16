@@ -1,0 +1,135 @@
+
+<div class="card">
+    <p-toast></p-toast>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedRoles || !selectedRoles.length"></button> -->
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
+           
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="projectBugsWithProjectInfo"
+        [rows]="5"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedRoles"
+        [rowHover]="true"
+        dataKey="role_id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Gérer les bugs</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <!-- <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." /> -->
+                    <!-- <input pInputText type="text" #inputText (input)="dt.filterGlobal(inputText.value, 'contains')" placeholder="Search..." /> -->
+                    <input pInputText type="text" #inputText [(ngModel)]="filterValue" (input)="filterRoles()" placeholder="Search..." />
+
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="bugDesc" style="min-width:15rem">Title <p-sortIcon field="bugDesc"></p-sortIcon></th>
+
+                <th pSortableColumn="projectName" style="min-width:15rem">Project <p-sortIcon field="projectName"></p-sortIcon></th>
+                
+                <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+
+                <th pSortableColumn="priority">Priority <p-sortIcon field="priority"></p-sortIcon></th>
+
+                <th pSortableColumn="user_name">User <p-sortIcon field="user_name"></p-sortIcon></th>
+
+
+                <th *ngIf="!isTesteur" ></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-projectbug>
+            <tr>
+                <td>{{ projectbug.bugDesc }}</td>
+                <td>{{ projectbug.projectName }}</td>
+                <td>
+                    <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" width="50" class="shadow-4" /> -->
+                    <!-- {{ projectbug.status }} -->
+
+                    <!-- {{ projectbug.status == 0 ? 'en cours': 'traité' }} -->
+                    <span [ngClass]="{ 'tag-warning': projectbug.status === 0, 'tag-success': projectbug.status !== 0 }" class="tag">
+                        {{ projectbug.status === 0 ? 'en cours' : 'traité' }}
+                      </span>
+                      
+                    <!-- <i style="font-size: 20px; color: white;" [ngClass]="{ 'pi-fw pi-user' : projectbug.status == 1 , 'pi-fw pi-users' : projectbug.status == 0  } " ></i> -->
+                    <!-- <i>test</i> -->
+                </td>
+                
+                <td>
+                    <span [ngClass]="{ 'priority-low': projectbug.priority.toLowerCase() == 'low', 'priority-medium': projectbug.priority.toLowerCase() == 'medium', 'priority-high': projectbug.priority.toLowerCase() == 'high' }" class="priority">
+                        {{ projectbug.priority }}
+                      </span>
+                      
+                    
+                    <!-- <input style="display: none;"  [ngStyle]=" isChecked == true ? {'background-color': '#f62e46'} : {'background-color': '#00BFA6'} " [(ngModel)]="isChecked" (click)="OnCheckedChanged($event)"  type="checkbox" class="Status" id="completed" /> -->
+                </td>
+
+                <td>
+                    {{ projectbug.user_name }}
+                </td>
+
+                <td *ngIf="!isTesteur" >
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProjectbug(projectbug)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProjectbug(projectbug)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">In total there are {{ projectBugs ? projectBugs.length : 0 }} bugs.</div>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog [(visible)]="projectBugDialog" [style]="{ width: '80vw', height: '80vh' }" header="{{ ManageDialogHeader }}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content" >
+        <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.image" class="block m-auto pb-3" *ngIf="product.image" /> -->
+        
+        <div class="flex flex-wrap" style="max-width: 100%">
+            <div class="flex flex-wrap justify-between m-2 border-round w-100">
+              <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+                <label for="name">Title</label>
+                <input type="text" pInputText [(ngModel)]="myProjectBug.BugDesc" id="name" style="width:292px" required autofocus />
+              </div>
+      
+              <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+                <label for="admin">Le project:</label>
+                <p-autoComplete [(ngModel)]="selectedProject" [virtualScroll]="true" [suggestions]="filteredProjects" [virtualScrollItemSize]="34" (completeMethod)="filterProjects($event)" [dropdown]="true" field="project_name" > </p-autoComplete>
+              </div>
+      
+              <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+                <label for="date">Le status:</label>
+                <p-autoComplete [(ngModel)]="selectedStatus" [virtualScroll]="true" [suggestions]="Status" (completeMethod)="filterStatus($event)" [virtualScrollItemSize]="34" [dropdown]="true" field="title" > </p-autoComplete>
+                <!-- <p-calendar ></p-calendar> -->
+              </div>
+              <div class="field flex align-items-center justify-content-around p-2" style="flex-basis: 100%; max-width: 100%">
+                <label for="date">La priorité:</label>
+                <p-autoComplete [(ngModel)]="selectedPriority" [virtualScroll]="true" [suggestions]="Priorities" [virtualScrollItemSize]="34" (completeMethod)="filterPriorities($event)" [dropdown]="true" field="title" > </p-autoComplete>
+                <!-- <p-calendar ></p-calendar> -->
+              </div>
+            </div>
+          </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="SaveProjectBug()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

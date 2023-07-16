@@ -1,0 +1,18 @@
+.p-dialog .p-dialog-footer {
+    text-align: left !important;
+}
+
+.btn_delete {
+    border: none;
+    background: #ED5050;
+    padding: 5px;
+    border-radius: .37em;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.btn_delete:hover {
+    background-color: red;
+}
+

@@ -11,6 +11,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ManageUserProfileComponent } from './manage-user-profile/manage-user-profile.component';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ManageUserProfileComponent } from './manage-user-profile/manage-user-pr
     ButtonModule,
     CheckboxModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastModule
   ]
 })
 export class AuthModule { }
